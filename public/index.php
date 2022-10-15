@@ -18,4 +18,5 @@
             break;
         default:
             echo "Página não encontrada, Erro 404";
+            break;
     }
