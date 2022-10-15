@@ -5,7 +5,7 @@
     use Alura\Cursos\Infra\EntityManagerCreator;
     use Alura\Cursos\Entity\Curso;
     // Classe controladora e listagem de cursos
-    class ListarCursos {
+    class ListarCursos implements InterfaceControladorRequisicao {
         private $repositorioDeCursos;
 
         public function __construct()
@@ -14,7 +14,7 @@
             $this->repositorioDeCursos = $entityManager->getRepository(Curso::class);
         }
         // método que vai listar os cursos
-        public function processaRequisicao() {
+        public function processaRequisicao(): void {
             
             $cursos = $this->repositorioDeCursos->findAll();
             ?><!-- Forma não recomendada de juntar html com php -->
