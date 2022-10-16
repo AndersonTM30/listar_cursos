@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../inicio-html.php'; ?>
 
-        <form action="/salvar-curso" method="POST">
+        <form action="/salvar-curso<?= isset($curso) ? '?id=' . $curso->getId() : ''; ?>" method="POST">
             <div class="form-group">
                 <label for="descricao">Descrição</label>
                 <input 

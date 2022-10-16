@@ -24,12 +24,24 @@ class Persistencia implements InterfaceControladorRequisicao
             'descricao',
             FILTER_SANITIZE_STRING
         );
-        
-        // montar o modelo curos
-        $curso = new Curso();
-        $curso->setDescricao($descricao);
-        // inserir no banco de dados
-        $this->entityManager->persist($curso);
+
+         // filtra e valida o id do curso no parâmetro da rota
+         $id = filter_input(
+            INPUT_GET,
+            'id',
+            FILTER_VALIDATE_INT
+        );
+        // verifica se a rota está com o id nulo ou vazio, se tiver vai voltar para a página de listar cursos
+        if (!is_null($id) && $id !== false) {
+            $curso = $this->entityManager->find(Curso::class, $id);
+            $curso->setDescricao($descricao);
+        } else {
+            // montar o modelo curos
+            $curso = new Curso();
+            $curso->setDescricao($descricao);
+            // inserir no banco de dados
+            $this->entityManager->persist($curso);
+        }
         $this->entityManager->flush();     
         // fazendo o redirecionamento para página de listar cursos
         header('Location: /listar-cursos', true, 302);
