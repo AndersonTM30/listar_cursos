@@ -30,6 +30,8 @@ class Persistencia implements InterfaceControladorRequisicao
         $curso->setDescricao($descricao);
         // inserir no banco de dados
         $this->entityManager->persist($curso);
-        $this->entityManager->flush();
+        $this->entityManager->flush();     
+        // fazendo o redirecionamento para página de listar cursos
+        header('Location: /listar-cursos', true, 302);
     }
 }
