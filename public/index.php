@@ -10,8 +10,7 @@
 
     // verifica se a rota existe
     if(!array_key_exists($caminho, $rotas)) {
-        http_response_code(404);
-        exit();
+        header('Location: /404', true, 302);
     };
 
     $classeControladora = $rotas[$caminho];
