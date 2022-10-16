@@ -18,8 +18,13 @@ class Persistencia implements InterfaceControladorRequisicao
 
     public function processaRequisicao(): void
     {
-        // pegar os dados do formulário
-        $descricao = $_POST['descricao'];
+        // filtrando os dados da requisição e pegar os dados do formulário
+        $descricao = filter_input(
+            INPUT_POST,
+            'descricao',
+            FILTER_SANITIZE_STRING
+        );
+        
         // montar o modelo curos
         $curso = new Curso();
         $curso->setDescricao($descricao);
