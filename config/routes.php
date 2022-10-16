@@ -7,6 +7,8 @@ use Alura\Cursos\Controller\FormularioLogin;
 use Alura\Cursos\Controller\ListarCursos;
 use Alura\Cursos\Controller\PaginaNaoEncontrada;
 use Alura\Cursos\Controller\Persistencia;
+use Alura\Cursos\Controller\RealizaLogin;
+
 //  lista de rotas
 return [
     '/listar-cursos'    =>  ListarCursos::class,
@@ -15,5 +17,6 @@ return [
     '/404'              =>  PaginaNaoEncontrada::class,
     '/excluir-curso'    =>  Exclusao::class,
     '/alterar-curso'    =>  FormularioEdicao::class,
-    '/login'            =>  FormularioLogin::class
+    '/login'            =>  FormularioLogin::class,
+    '/realiza-login'    =>  RealizaLogin::class
 ];
