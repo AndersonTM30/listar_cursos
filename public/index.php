@@ -5,6 +5,7 @@
     // importação de classes
     use Alura\Cursos\Controller\FormularioInsercao;
     use Alura\Cursos\Controller\ListarCursos;
+use Alura\Cursos\Controller\Persistencia;
 
     // redirecionamento de páginas
     switch($_SERVER['PATH_INFO']) {
@@ -14,6 +15,10 @@
             break;
         case '/novo-curso': 
             $controlador = new FormularioInsercao();
+            $controlador->processaRequisicao();
+            break;
+        case '/salvar-curso':
+            $controlador = new Persistencia();
             $controlador->processaRequisicao();
             break;
         default:
