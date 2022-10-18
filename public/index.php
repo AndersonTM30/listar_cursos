@@ -13,6 +13,9 @@
         header('Location: /404', true, 302);
     };
 
+    //inicia a sessão
+    session_start();
+
     $classeControladora = $rotas[$caminho];
     /** @var InterfaceControladorRequisicao $controler */
     $controlador = new $classeControladora();// cria uma classe controladora

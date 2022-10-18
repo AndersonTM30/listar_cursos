@@ -30,8 +30,11 @@ class RealizaLogin implements InterfaceControladorRequisicao
 
         if (is_null($usuario) || !$usuario->senhaEstaCorreta($senha)) {
             echo "E-mail ou senha inválidos!";
-            exit();
+            return;
         }
+        
+        //verifica se está logado
+        $_SESSION['logado'] = true;
 
         header('Location: /listar-cursos');
     }
