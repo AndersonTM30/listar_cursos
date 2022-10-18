@@ -4,8 +4,13 @@
     // imports das classes de Curso e da Entidade do banco de dados
     use Alura\Cursos\Infra\EntityManagerCreator;
     use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Helper\RenderizadorDeHtmlTrait;
+
     // Classe controladora e listagem de cursos
-    class ListarCursos extends ControllerComHtml implements InterfaceControladorRequisicao {
+    class ListarCursos implements InterfaceControladorRequisicao {
+
+        use RenderizadorDeHtmlTrait;
+
         private $repositorioDeCursos;
 
         public function __construct()

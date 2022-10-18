@@ -2,8 +2,11 @@
 namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Controller\InterfaceControladorRequisicao;
+use Alura\Cursos\Helper\RenderizadorDeHtmlTrait;
 
-class PaginaNaoEncontrada extends ControllerComHtml implements InterfaceControladorRequisicao {
+class PaginaNaoEncontrada implements InterfaceControladorRequisicao {
+
+    use RenderizadorDeHtmlTrait;
 
     public function processaRequisicao(): void
     {

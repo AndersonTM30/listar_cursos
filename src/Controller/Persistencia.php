@@ -3,10 +3,13 @@
 namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Helper\FlashMessagemTrait;
 use Alura\Cursos\Infra\EntityManagerCreator;
 
 class Persistencia implements InterfaceControladorRequisicao
 {
+    use FlashMessagemTrait;
+
     private $entityManager;
 
     public function __construct()
@@ -31,21 +34,20 @@ class Persistencia implements InterfaceControladorRequisicao
             'id',
             FILTER_VALIDATE_INT
         );
+        $tipo = 'success';
         // verifica se a rota está com o id nulo ou vazio, se tiver vai voltar para a página de listar cursos
         if (!is_null($id) && $id !== false) {
             $curso = $this->entityManager->find(Curso::class, $id);
             $curso->setDescricao($descricao);
-            $_SESSION['mensagem'] = 'Curso atualizado com sucesso!';
+            $this->defineMensagem($tipo, 'Curso atualizado com sucesso!');
         } else {
             // montar o modelo curos
             $curso = new Curso();
             $curso->setDescricao($descricao);
             // inserir no banco de dados
             $this->entityManager->persist($curso);
-            $_SESSION['mensagem'] = 'Curso inserido com sucesso!';
+            $this->defineMensagem($tipo, 'Curso inserido com sucesso!');
         }
-
-        $_SESSION['tipo_mensagem'] = 'success';
 
         $this->entityManager->flush();     
         // fazendo o redirecionamento para página de listar cursos

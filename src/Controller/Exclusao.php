@@ -3,9 +3,13 @@
 namespace Alura\Cursos\Controller;
 
 use Alura\Cursos\Entity\Curso;
+use Alura\Cursos\Helper\FlashMessagemTrait;
 use Alura\Cursos\Infra\EntityManagerCreator;
 
 class Exclusao implements InterfaceControladorRequisicao {
+    //utilizando traits para envio de mensagem
+    use FlashMessagemTrait;
+
     private $entityManager;
 
     public function __construct()
@@ -24,8 +28,7 @@ class Exclusao implements InterfaceControladorRequisicao {
         );
         // verifica se a rota está com o id nulo ou vazio, se tiver vai voltar para a página de listar cursos
         if (is_null($id) || $id === false) {
-            $_SESSION['tipo_mensagem'] = 'danger';
-            $_SESSION['mensagem'] = "Curso inexistente!";
+            $this->defineMensagem('danger', 'Curso inexistente!');
             header('Location: /listar-cursos');
             return;
         }
@@ -36,8 +39,7 @@ class Exclusao implements InterfaceControladorRequisicao {
         // manda as alterações para o banco de dados
         $this->entityManager->flush();
 
-        $_SESSION['tipo_mensagem'] = 'success';
-        $_SESSION['mensagem'] = "Curso removido com sucesso!";
+        $this->defineMensagem('success', 'Curso removido com sucesso!');
 
         // redireciona para a tela de listar cursos depois de excluir o curso
         header('Location: /listar-cursos');
