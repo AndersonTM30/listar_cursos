@@ -15,6 +15,12 @@
 
     //inicia a sessão
     session_start();
+    //verifica se na string tem a palavra login
+    $ehRotaDeLogin = stripos($caminho, 'login');
+    if (!isset($_SESSION['logado']) && $ehRotaDeLogin === false) {
+        header('Location: /login');
+        // exit();
+    }
 
     $classeControladora = $rotas[$caminho];
     /** @var InterfaceControladorRequisicao $controler */
