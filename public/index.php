@@ -16,8 +16,8 @@
     //inicia a sessão
     session_start();
     //verifica se na string tem a palavra login
-    $ehRotaDeLogin = stripos($caminho, 'login');
-    if (!isset($_SESSION['logado']) && $ehRotaDeLogin === false) {
+    $ehRotaDeLogin = str_contains($caminho, 'login');
+    if (!isset($_SESSION['logado']) && !$ehRotaDeLogin) {
         header('Location: /login');
         // exit();
     }
