@@ -19,8 +19,10 @@ class RealizaLogin implements InterfaceControladorRequisicao
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
         if(is_null($email) || $email === false) {
-            echo "O e-mail digitado não é um e-mail válido!";
-            exit();
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = "O e-mail digitado não é um e-mail válido!";
+            header('Location: /login');
+            return;
         }
 
         $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
@@ -29,7 +31,9 @@ class RealizaLogin implements InterfaceControladorRequisicao
             ->findOneBy(['email' => $email]);
 
         if (is_null($usuario) || !$usuario->senhaEstaCorreta($senha)) {
-            echo "E-mail ou senha inválidos!";
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = "E-mail ou senha inválidos!";
+            header('Location: /login');
             return;
         }
         

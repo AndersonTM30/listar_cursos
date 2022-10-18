@@ -24,6 +24,8 @@ class Exclusao implements InterfaceControladorRequisicao {
         );
         // verifica se a rota está com o id nulo ou vazio, se tiver vai voltar para a página de listar cursos
         if (is_null($id) || $id === false) {
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = "Curso inexistente!";
             header('Location: /listar-cursos');
             return;
         }
@@ -33,6 +35,10 @@ class Exclusao implements InterfaceControladorRequisicao {
         $this->entityManager->remove($curso);
         // manda as alterações para o banco de dados
         $this->entityManager->flush();
+
+        $_SESSION['tipo_mensagem'] = 'success';
+        $_SESSION['mensagem'] = "Curso removido com sucesso!";
+
         // redireciona para a tela de listar cursos depois de excluir o curso
         header('Location: /listar-cursos');
     }
